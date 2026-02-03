@@ -170,16 +170,31 @@ const govProgramId = new PublicKey(
   'hgovkRU6Ghe1Qoyb54HdSLdqN7VtxaifBzRmh9jtd3S',
 )
 
-export const SolanaConnection = (sessionKey: string) =>
-  ({
+const buildRpcUrl = (
+  baseUrl: string | undefined,
+  sessionKey: string,
+): string | undefined => {
+  if (!baseUrl) return undefined
+  if (baseUrl.includes('session-key=')) return baseUrl
+  const delimiter = baseUrl.includes('?') ? '&' : '?'
+  return `${baseUrl}${delimiter}session-key=${sessionKey}`
+}
+
+export const SolanaConnection = (sessionKey: string) => {
+  const mainnetBase = Config.HELIUS_MAINNET_RPC_URL || Config.MAINNET_RPC_URL
+  const devnetBase = Config.HELIUS_DEVNET_RPC_URL || Config.DEVNET_RPC_URL
+  return {
     devnet: new WrappedConnection(
-      `${Config.DEVNET_RPC_URL}/?session-key=${sessionKey}`,
+      buildRpcUrl(devnetBase, sessionKey) ||
+        `${Config.DEVNET_RPC_URL}/?session-key=${sessionKey}`,
     ),
     testnet: new WrappedConnection(clusterApiUrl('testnet')),
     'mainnet-beta': new WrappedConnection(
-      `${Config.MAINNET_RPC_URL}/?session-key=${sessionKey}`,
+      buildRpcUrl(mainnetBase, sessionKey) ||
+        `${Config.MAINNET_RPC_URL}/?session-key=${sessionKey}`,
     ),
-  } as const)
+  } as const
+}
 
 export const getConnection = (cluster: Cluster, sessionKey: string) =>
   SolanaConnection(sessionKey)[cluster] || SolanaConnection(sessionKey).devnet

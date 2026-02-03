@@ -13,6 +13,7 @@ import { solAddressIsValid } from './accountUtils'
 export const APP_LINK_SCHEME = Linking.createURL('')
 export const PAYMENT_PATH = 'payment'
 export const HELIUM_WALLET_LINK_SCHEME = 'https://wallet.helium.com/'
+export const MWA_LINK_SCHEME = 'solana-wallet://'
 
 export type SendDetails = {
   payee: string
@@ -21,7 +22,7 @@ export type SendDetails = {
 }
 
 export const authenticatedLinking: LinkingOptions<RootStackParamList> = {
-  prefixes: [APP_LINK_SCHEME, HELIUM_WALLET_LINK_SCHEME],
+  prefixes: [APP_LINK_SCHEME, HELIUM_WALLET_LINK_SCHEME, MWA_LINK_SCHEME],
   config: {
     screens: {
       LinkWallet: 'link_wallet',
@@ -29,6 +30,7 @@ export const authenticatedLinking: LinkingOptions<RootStackParamList> = {
       PaymentScreen: 'payment',
       DappLoginScreen: 'dapp_login',
       ImportPrivateKey: 'import_key/:key',
+      MwaConnectScreen: 'v1/associate',
     },
   },
   getInitialURL: async () => {
@@ -38,7 +40,7 @@ export const authenticatedLinking: LinkingOptions<RootStackParamList> = {
 }
 
 export const unauthenticatedLinking: LinkingOptions<RootStackParamList> = {
-  prefixes: [APP_LINK_SCHEME, HELIUM_WALLET_LINK_SCHEME],
+  prefixes: [APP_LINK_SCHEME, HELIUM_WALLET_LINK_SCHEME, MWA_LINK_SCHEME],
   config: {
     screens: {
       OnboardingNavigator: {
@@ -46,6 +48,7 @@ export const unauthenticatedLinking: LinkingOptions<RootStackParamList> = {
           ImportPrivateKey: 'import_key/:key',
         },
       },
+      MwaConnectScreen: 'v1/associate',
     },
   },
 }

@@ -11,6 +11,7 @@ import ConnectedWallets, {
   ConnectedWalletsRef,
 } from '../features/account/ConnectedWallets'
 import DappLoginScreen from '../features/dappLogin/DappLoginScreen'
+import MwaConnectScreen from '../features/mwa/MwaConnectScreen'
 import { HomeNavigationProp } from '../features/home/homeTypes'
 import OnboardingNavigator from '../features/onboarding/OnboardingNavigator'
 import ImportPrivateKey from '../features/onboarding/import/ImportPrivateKey'
@@ -101,6 +102,11 @@ const RootNavigator = () => {
         <RootStack.Screen
           name="ImportPrivateKey"
           component={ImportPrivateKey}
+          options={screenOptions}
+        />
+        <RootStack.Screen
+          name="MwaConnectScreen"
+          component={MwaConnectScreen}
           options={screenOptions}
         />
       </RootStack.Navigator>
