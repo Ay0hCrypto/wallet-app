@@ -500,6 +500,29 @@ export default {
     testnetTokens: 'Testnet Tokens',
     delegate: 'Delegate',
     airdrop: 'Airdrop',
+    clean: 'Clean',
+  },
+  dustCleanup: {
+    title: 'Clean Up Dust',
+    subtitle:
+      'Select empty accounts or tokens worth less than ${{limit}} to reclaim rent.',
+    empty: 'No empty or dust token accounts found.',
+    emptyAccount: 'Empty account',
+    valueLabel: '≈ ${{amount}}',
+    valueUnavailable: 'Value unavailable',
+    estimatedReturn: 'Estimated return: {{amount}} SOL',
+    close: 'Close Selected Accounts',
+    success: {
+      title: 'Accounts Closed',
+      message: 'Selected token accounts were closed and rent returned.',
+    },
+    error: {
+      title: 'Cleanup Failed',
+    },
+    tooMany: {
+      title: 'Too Many Accounts',
+      message: 'Select up to {{max}} accounts to close at once.',
+    },
   },
   addNewAccount: {
     title: 'Add New Wallet',
