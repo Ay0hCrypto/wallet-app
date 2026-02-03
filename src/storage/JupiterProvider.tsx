@@ -77,9 +77,13 @@ export const JupiterProvider: React.FC = ({ children }) => {
 
       try {
         setLoading(true)
+        const platformFeeBps =
+          Number(Config.JUPITER_FEE_BPS) ||
+          Number(Config.HELIUS_REBATE_BPS) ||
+          0
         foundRoutes = await api.quoteGet({
           ...opts,
-          platformFeeBps: Number(Config.JUPITER_FEE_BPS) || 0,
+          platformFeeBps,
         })
         setRoutes(foundRoutes)
       } catch (err: any) {
@@ -104,7 +108,10 @@ export const JupiterProvider: React.FC = ({ children }) => {
           swapRequest: {
             quoteResponse: routes,
             userPublicKey: wallet.toBase58(),
-            feeAccount: Config.JUPITER_FEE_ACCOUNT || undefined,
+            feeAccount:
+              Config.JUPITER_FEE_ACCOUNT ||
+              Config.HELIUS_REBATE_WALLET ||
+              undefined,
             ...opts,
           },
         })
