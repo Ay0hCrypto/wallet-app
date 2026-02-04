@@ -540,6 +540,14 @@ export default {
     },
     title: 'Add New Contact',
   },
+  mwa: {
+    title: 'Connect Mobile Wallet',
+    subtitle: 'Allow {{appUrl}} to connect on {{cluster}}.',
+    approve: 'Approve Connection',
+    reject: 'Reject',
+    invalidRequest: 'Invalid mobile wallet request.',
+    unknownApp: 'Unknown app',
+  },
   addressBook: {
     addNext: 'Add New...',
     qrScanFail: {

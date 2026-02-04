@@ -33,10 +33,12 @@ import {
 import BN from 'bn.js'
 import bs58 from 'bs58'
 import { first, last } from 'lodash'
+import Config from 'react-native-config'
 import { CSAccount } from '../../storage/cloudStorage'
 import { Activity } from '../../types/activity'
 import { HotspotWithPendingRewards } from '../../types/solana'
 import * as Logger from '../../utils/logger'
+import { sendHeliusBackrunTransaction } from '../../utils/helius'
 import * as solUtils from '../../utils/solanaUtils'
 import { postPayment } from '../../utils/walletApiV2'
 import { fetchCollectables } from './collectablesSlice'
@@ -202,7 +204,13 @@ export const sendJupiterSwap = createAsyncThunk(
     try {
       const signed = await anchorProvider.wallet.signTransaction(swapTxn)
 
-      const sig = await anchorProvider.sendAndConfirm(signed)
+      const sig =
+        Config.HELIUS_BACKRUN_TRADES === 'true'
+          ? await sendHeliusBackrunTransaction({
+              connection: anchorProvider.connection,
+              transaction: signed,
+            })
+          : await anchorProvider.sendAndConfirm(signed)
 
       postPayment({ signatures: [sig], cluster })
     } catch (error) {
