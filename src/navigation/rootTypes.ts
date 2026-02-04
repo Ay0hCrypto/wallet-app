@@ -11,6 +11,12 @@ export type RootStackParamList = {
   RequestScreen: undefined
   DappLoginScreen: { uri: string; callback: string }
   ImportPrivateKey: { key?: string }
+  MwaConnectScreen: {
+    dapp_encryption_public_key?: string
+    redirect_link?: string
+    app_url?: string
+    cluster?: string
+  }
 }
 
 export type TabBarStackParamList = {

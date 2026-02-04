@@ -38,6 +38,7 @@ export type HomeStackParamList = {
   PaymentScreen: undefined | PaymentRouteParam
   AirdropScreen: { mint: string }
   BurnScreen: BurnRouteParam
+  DustCleanupScreen: undefined
   PaymentQrScanner: undefined
   RequestScreen: undefined
   OnboardData: undefined
