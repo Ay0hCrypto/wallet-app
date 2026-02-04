@@ -74,6 +74,7 @@ Follow the instructions for "React Native CLI Quickstart" found [here](https://r
   yarn
   ```
 - Fill out your env.sample with your values and rename it to `.env`. Keep private keys (for example Helius API keys and RPC URLs) out of git history and never commit them. Set up a Mapbox account and generate a public and private key for the access token and download token environment variables. If you use Helius swap rebates or backrun routing, set `HELIUS_REBATE_WALLET`, `HELIUS_REBATE_BPS`, and `HELIUS_BACKRUN_TRADES` (or `JUPITER_FEE_*`) in `.env`.
+- Fill out your env.sample with your values and rename it to `.env`. Keep private keys (for example Helius API keys and RPC URLs) out of git history and never commit them. Set up a Mapbox account and generate a public and private key for the access token and download token environment variables. If you use Helius swap rebates, set `HELIUS_REBATE_WALLET` and `HELIUS_REBATE_BPS` (or `JUPITER_FEE_*`) in `.env`.
 
 - Create a netrc file to authenticate with mapbox
   ```bash
