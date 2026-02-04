@@ -181,8 +181,8 @@ const buildRpcUrl = (
 }
 
 export const SolanaConnection = (sessionKey: string) => {
-  const mainnetBase = Config.MAINNET_RPC_URL
-  const devnetBase = Config.DEVNET_RPC_URL
+  const mainnetBase = Config.HELIUS_MAINNET_RPC_URL || Config.MAINNET_RPC_URL
+  const devnetBase = Config.HELIUS_DEVNET_RPC_URL || Config.DEVNET_RPC_URL
   return {
     devnet: new WrappedConnection(
       buildRpcUrl(devnetBase, sessionKey) ||

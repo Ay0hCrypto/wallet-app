@@ -6,7 +6,8 @@ type HeliusSendResponse = {
   result: string
 }
 
-const HELIUS_API_URL = 'https://api.helius.xyz'
+const getHeliusApiUrl = () =>
+  Config.HELIUS_API_URL || 'https://api.helius.xyz'
 
 export const sendHeliusBackrunTransaction = async ({
   connection,
@@ -24,7 +25,7 @@ export const sendHeliusBackrunTransaction = async ({
   const encoded = Buffer.from(serialized).toString('base64')
 
   const { data } = await axios.post<HeliusSendResponse>(
-    `${HELIUS_API_URL}/v0/transactions?api-key=${apiKey}`,
+    `${getHeliusApiUrl()}/v0/transactions?api-key=${apiKey}`,
     {
       transactions: [encoded],
       skipPreflight: true,
