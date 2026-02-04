@@ -1,13 +1,28 @@
 import axios from 'axios'
 import Config from 'react-native-config'
 import { Connection, Transaction, VersionedTransaction } from '@solana/web3.js'
+import bs58 from 'bs58'
 
 type HeliusSendResponse = {
   result: string
 }
 
-const getHeliusApiUrl = () =>
-  Config.HELIUS_API_URL || 'https://api.helius.xyz'
+const DEFAULT_HELIUS_RPC = 'https://mainnet.helius-rpc.com/'
+
+const buildHeliusRpcUrl = (rpcUrl: string) => {
+  const url = new URL(rpcUrl)
+  const rebateAddress = Config.HELIUS_REBATE_WALLET
+
+  if (Config.HELIUS_API_KEY && !url.searchParams.get('api-key')) {
+    url.searchParams.set('api-key', Config.HELIUS_API_KEY)
+  }
+
+  if (rebateAddress) {
+    url.searchParams.set('rebate-address', rebateAddress)
+  }
+
+  return url.toString()
+}
 
 export const sendHeliusBackrunTransaction = async ({
   connection,
@@ -16,20 +31,27 @@ export const sendHeliusBackrunTransaction = async ({
   connection: Connection
   transaction: Transaction | VersionedTransaction
 }) => {
-  const apiKey = Config.HELIUS_API_KEY
-  if (!apiKey) {
-    throw new Error('Missing Helius API key')
+  const rpcUrl =
+    Config.MAINNET_RPC_URL || connection.rpcEndpoint || DEFAULT_HELIUS_RPC
+  if (!rpcUrl) {
+    throw new Error('Missing Helius RPC URL')
   }
 
-  const serialized = transaction.serialize()
-  const encoded = Buffer.from(serialized).toString('base64')
-
+  const encoded = bs58.encode(transaction.serialize())
   const { data } = await axios.post<HeliusSendResponse>(
-    `${getHeliusApiUrl()}/v0/transactions?api-key=${apiKey}`,
+    buildHeliusRpcUrl(rpcUrl),
     {
-      transactions: [encoded],
-      skipPreflight: true,
-      maxRetries: 0,
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'sendTransaction',
+      params: [
+        encoded,
+        {
+          encoding: 'base58',
+          skipPreflight: true,
+          preflightCommitment: 'processed',
+        },
+      ],
     },
   )
 

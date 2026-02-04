@@ -88,13 +88,8 @@ const useAppStorageHook = () => {
       setPin({ value: nextPin || '', status: nextPin ? 'restored' : 'off' })
       setRequirePinForPayment(nextPinForPayment === 'true')
 
-      // Always lock when app is freshly started
       if (nextPin) {
-        if (locked === undefined) {
-          setLocked(true)
-        } else {
-          setLocked(nextLocked === 'true')
-        }
+        setLocked(nextLocked === 'true')
       } else {
         setLocked(false)
       }
