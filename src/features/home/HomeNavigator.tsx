@@ -12,6 +12,7 @@ import AddNewContact from '../addressBook/AddNewContact'
 import AddressBookNavigator from '../addressBook/AddressBookNavigator'
 import AddressQrScanner from '../addressBook/AddressQrScanner'
 import BurnScreen from '../burn/BurnScreen'
+import DustCleanupScreen from '../burn/DustCleanupScreen'
 import NotificationsNavigator from '../notifications/NotificationsNavigator'
 import AccountAssignScreen from '../onboarding/AccountAssignScreen'
 import ImportAccountNavigator from '../onboarding/import/ImportAccountNavigator'
@@ -55,6 +56,10 @@ const HomeStackScreen = () => {
         options={screenModalOptions}
       />
       <HomeStack.Screen name="BurnScreen" component={BurnScreen} />
+      <HomeStack.Screen
+        name="DustCleanupScreen"
+        component={DustCleanupScreen}
+      />
       <HomeStack.Screen
         name="PaymentQrScanner"
         component={PaymentQrScanner}

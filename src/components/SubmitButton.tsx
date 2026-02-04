@@ -12,8 +12,13 @@ type Props = {
   disabled?: boolean
 } & BoxProps<Theme>
 const SubmitButton = ({ onSubmit, title, disabled, ...boxProps }: Props) => {
-  const { surfaceSecondary, secondaryText, blueBright500, secondaryIcon } =
-    useColors()
+  const {
+    surfaceSecondary,
+    secondaryText,
+    blueBright500,
+    secondaryIcon,
+    border,
+  } = useColors()
   const icon = useMemo(
     () => () => <SwipeIcon color={blueBright500} />,
     [blueBright500],
@@ -28,11 +33,11 @@ const SubmitButton = ({ onSubmit, title, disabled, ...boxProps }: Props) => {
       },
       railStyles: {
         backgroundColor: surfaceSecondary,
-        borderColor: surfaceSecondary,
+        borderColor: border,
       },
     }),
 
-    [blueBright500, disabled, secondaryText, surfaceSecondary],
+    [blueBright500, border, disabled, secondaryText, surfaceSecondary],
   )
 
   return (
@@ -42,11 +47,11 @@ const SubmitButton = ({ onSubmit, title, disabled, ...boxProps }: Props) => {
         shouldResetAfterSuccess
         railBackgroundColor={secondaryIcon}
         railStyles={styles.railStyles}
-        railBorderColor={secondaryIcon}
+        railBorderColor={border}
         titleStyles={styles.titleStyles}
         titleMaxFontScale={1}
         thumbIconBackgroundColor={secondaryIcon}
-        thumbIconBorderColor={blueBright500}
+        thumbIconBorderColor={border}
         title={title}
         onSwipeSuccess={onSubmit}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -22,3 +22,8 @@ export const IOT_SUB_DAO_KEY = subDaoKey(IOT_MINT)[0]
 export const MOBILE_SUB_DAO_KEY = subDaoKey(MOBILE_MINT)[0]
 
 export const MIN_BALANCE_THRESHOLD = 0.02 * LAMPORTS_PER_SOL
+export const DUST_MAX_USD = 1
+export const CLEANUP_FEE_SOL = 0.0001
+export const CLEANUP_FEE_LAMPORTS = CLEANUP_FEE_SOL * LAMPORTS_PER_SOL
+export const CLEANUP_FEE_WALLET =
+  'EAT5eyaiBWCMy2k2AJQQxP3WsZXXdcWzfCYgXcaTPQTa'
