@@ -17,6 +17,7 @@ export type Action =
   | '5G'
   | 'delegate'
   | 'swaps'
+  | 'clean'
   | 'airdrop'
 
 type Props = {
@@ -29,6 +30,7 @@ type Props = {
   hasRequest?: boolean
   hasDelegate?: boolean
   hasSwaps?: boolean
+  hasClean?: boolean
   hasAirdrop?: boolean
 }
 
@@ -41,6 +43,7 @@ const AccountActionBar = ({
   hasRequest = true,
   hasDelegate,
   hasSwaps,
+  hasClean,
   hasAirdrop,
   mint,
 }: Props) => {
@@ -73,6 +76,10 @@ const AccountActionBar = ({
           if (mint) {
             navigation.navigate('AirdropScreen', { mint: mint?.toBase58() })
           }
+          break
+        }
+        case 'clean': {
+          navigation.navigate('DustCleanupScreen')
           break
         }
         case '5G': {
@@ -201,6 +208,37 @@ const AccountActionBar = ({
                 textAlign="center"
               >
                 {t('airdropScreen.airdrop')}
+              </Text>
+            </Box>
+          )}
+        </Box>
+      )}
+      {hasClean && (
+        <Box
+          marginEnd={fabMargin}
+          flexDirection={hasBottomTitle ? 'column' : 'row'}
+        >
+          <FabButton
+            icon="close"
+            backgroundColor="auroraGreen"
+            backgroundColorOpacity={0.2}
+            backgroundColorOpacityPressed={0.4}
+            iconColor="auroraGreen"
+            title={compact || maxCompact ? undefined : t('accountView.clean')}
+            onPress={handleAction('clean')}
+            width={maxCompact ? 47.5 : undefined}
+            height={maxCompact ? 47.5 : undefined}
+            justifyContent="center"
+          />
+          {hasBottomTitle && (
+            <Box marginTop="s">
+              <Text
+                variant="body2Medium"
+                color="secondaryText"
+                marginTop="xs"
+                textAlign="center"
+              >
+                {t('accountView.clean')}
               </Text>
             </Box>
           )}

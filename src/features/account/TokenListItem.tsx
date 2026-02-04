@@ -57,7 +57,7 @@ const TokenListItem = ({ mint }: Props) => {
         alignItems="center"
         paddingHorizontal="m"
         paddingVertical="m"
-        borderBottomColor="primaryBackground"
+        borderBottomColor="border"
         borderBottomWidth={1}
       >
         {loading ? (
@@ -129,7 +129,7 @@ export const TokenSkeleton = () => {
         height={ITEM_HEIGHT}
         alignItems="center"
         paddingHorizontal="l"
-        borderBottomColor="primaryBackground"
+        borderBottomColor="border"
         borderBottomWidth={1}
       >
         <Box

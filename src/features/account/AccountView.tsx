@@ -10,6 +10,7 @@ import { Theme } from '@theme/theme'
 import TokenPricesTicker from '@components/TokenPricesTicker'
 import CopyAddressPill from '@components/CopyAddressPill'
 import CurrencyFormatter from 'react-native-currency-format'
+import LogoE from '@assets/images/logoE.svg'
 import { useBalance } from '../../utils/Balance'
 import { useAppStorage } from '../../storage/AppStorageProvider'
 import AccountActionBar from './AccountActionBar'
@@ -52,6 +53,9 @@ const AccountView = ({ selectedBalance, ...boxProps }: Props) => {
 
   return (
     <Box flexDirection="column" alignItems="center" {...boxProps}>
+      <Box alignItems="center" marginTop="m">
+        <LogoE width={56} height={56} />
+      </Box>
       <Box>
         <TokenPricesTicker marginVertical="m" />
       </Box>
@@ -97,6 +101,7 @@ const AccountView = ({ selectedBalance, ...boxProps }: Props) => {
             <AccountActionBar
               compact
               hasSwaps
+              hasClean
               hasBottomTitle
               onLayout={setActionBarHeight}
             />
